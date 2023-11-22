@@ -1,0 +1,6 @@
+-- This script creates the currency table for the project
+
+CREATE TABLE currency (
+    "currency" VARCHAR(3) PRIMARY KEY,
+	"rates" DECIMAL(10,5) NOT NULL CHECK(balance >= 0)
+); 

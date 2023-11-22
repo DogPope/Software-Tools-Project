@@ -1,0 +1,9 @@
+-- Schema for the account table. 
+
+CREATE TABLE account (
+    "currency" VARCHAR(3),
+	"cust_id" INT,
+    "balance" DECIMAL(10,5) NOT NULL CHECK(balance >= 0),
+    "status" CHAR(1) NOT NULL,
+    PRIMARY KEY (currency, cust_id)
+);

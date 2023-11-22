@@ -1,0 +1,6 @@
+-- This script resets the database and drops all tables and their constraints.
+
+DROP TABLE customer CASCADE;
+DROP TABLE account CASCADE;
+DROP TABLE transaction CASCADE;
+DROP TABLE currency CASCADE;

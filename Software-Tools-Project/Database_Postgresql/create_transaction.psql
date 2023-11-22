@@ -1,0 +1,9 @@
+-- This table creates the Transaction script for a table.
+
+CREATE TABLE transaction (
+    "transact_id" SERIAL PRIMARY KEY,
+    "account_id" INT,
+	"currency" VARCHAR(10) NOT NULL,
+    "amount" DECIMAL(10,5) NOT NULL CHECK(amount >= 0),
+    CONSTRAINT fk_account_id FOREIGN KEY ("account_id") REFERENCES account ("account_id")
+);

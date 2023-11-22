@@ -1,0 +1,57 @@
+-- Translate this entire script into mongoDB, but since uses a different schema entirely, that might be hard.
+-- Use exchangeratesapi.io for the currency API and a few schema.
+-- All useless now apparently.
+
+DROP TABLE customer CASCADE;
+DROP TABLE account CASCADE;
+DROP TABLE transaction CASCADE;
+DROP TABLE currency CASCADE;
+
+-- Customer must hve multiple balances for different currencies. Must account for this.
+CREATE TABLE customer (
+    "cust_id" SERIAL PRIMARY KEY,
+    "username" VARCHAR(20) NOT NULL UNIQUE,
+    "email" VARCHAR(50) NOT NULL UNIQUE,
+    "phone" CHAR(10) NOT NULL UNIQUE,
+    "password" VARCHAR(10) NOT NULL,
+    "cardnumber" CHAR(16) NOT NULL UNIQUE,
+    "status" CHAR(1)
+);
+
+-- Works.
+CREATE TABLE account (
+    "currency" VARCHAR(3),
+	"cust_id" INT,
+    "balance" DECIMAL(10,5) NOT NULL CHECK(balance >= 0),
+    "status" CHAR(1) NOT NULL,
+    PRIMARY KEY (currency, cust_id)
+);
+
+CREATE TABLE currency (
+    "currency" VARCHAR(3) PRIMARY KEY,
+	"rates" DECIMAL(10,5) NOT NULL CHECK(balance >= 0)
+); 
+
+-- Works.
+CREATE TABLE transaction (
+    "transact_id" SERIAL PRIMARY KEY,
+    "account_id" INT,
+	"currency" VARCHAR(3) NOT NULL,
+    "amount" DECIMAL(10,5) NOT NULL CHECK(amount >= 0),
+    CONSTRAINT fk_account_id FOREIGN KEY ("account_id") REFERENCES account ("account_id")
+);
+
+-- Test values for tables.
+INSERT INTO customer ("username","email","phone","password","cardnumber","status") 
+VALUES('Jeff','email@email.com','0876543212','password','1234123412341234','R');
+
+INSERT INTO account ("cust_id","balance","status")
+VALUES(1,23.50,'R');
+
+INSERT INTO transaction ("account_id","amount") 
+VALUES(1,12345.123);
+
+INSERT INTO currency ("name","value","status") 
+VALUES('GBP',12345.123,'R');
+
+-- Store each table in a file each. Seperate scripts for dropping tables, adding data etc.

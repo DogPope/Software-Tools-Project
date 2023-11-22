@@ -1,0 +1,13 @@
+-- This script is responsible for adding data into the already existing tables.
+
+INSERT INTO customer ("username","email","phone","password","cardnumber","status") 
+VALUES('Jeff','email@email.com','0876543212','password','1234123412341234','R');
+
+INSERT INTO account ("cust_id","balance","status")
+VALUES(1,23.50,'R');
+
+INSERT INTO transaction ("account_id","amount") 
+VALUES(1,12345.123);
+
+INSERT INTO currency ("name","value","status") 
+VALUES('GBP',12345.123,'R');

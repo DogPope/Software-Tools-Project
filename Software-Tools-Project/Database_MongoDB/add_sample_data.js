@@ -1,0 +1,1 @@
+// This script is in charge of adding sample data to the mongoDB iteration of our database.
